@@ -1,0 +1,64 @@
+name: Syllabus source checks
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: syllabus-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  syllabus:
+    name: Syllabus / ${{ matrix.os }} / Python 3.12
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-24.04, windows-latest]
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: '3.12'
+      - uses: astral-sh/setup-uv@d0cc045d04ccac9d8b7881df0226f9e82c39688e # v6
+        with:
+          version: '0.13.0'
+          enable-cache: true
+          cache-dependency-glob: uv.lock
+      - name: Install locked base environment
+        run: uv sync --frozen
+      - name: Verify synthetic pipeline, offline boundaries and portable bundle
+        run: uv run --frozen python -m unittest discover -s tests -v
+      - name: Verify optional PDF extraction using synthetic documents
+        run: |
+          uv sync --frozen --extra extract
+          uv run --frozen --extra extract python -m unittest discover -s tests -v
+      - name: Check CLI and publication boundary
+        run: |
+          uv run --frozen curriculum-search --version
+          uv run --frozen curriculum-search sources
+          uv run --frozen python scripts/publication.py --check
+      - name: Export and independently install the source
+        if: runner.os == 'Linux'
+        shell: bash
+        run: |
+          uv run --frozen python scripts/publication.py --output dist/synaxis-syllabus-source.zip
+          python -m zipfile -e dist/synaxis-syllabus-source.zip "$RUNNER_TEMP/synaxis-syllabus-source"
+          cd "$RUNNER_TEMP/synaxis-syllabus-source"
+          uv sync --frozen
+          uv run --frozen python -m unittest discover -s tests -v
+          uv run --frozen python scripts/publication.py --check
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        if: success() && runner.os == 'Linux'
+        with:
+          name: synaxis-syllabus-source
+          path: dist/synaxis-syllabus-source.zip
+          if-no-files-found: error

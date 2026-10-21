@@ -1,0 +1,103 @@
+{
+  "schema_version": "1.0",
+  "edition": "普通高中课程方案和学科课程标准（2017年版；教育部2018年8月15日附件基准）",
+  "official_source": "https://www.moe.gov.cn/srcsite/A26/s8001/201801/t20180115_324647.html",
+  "content_distribution": "Source PDFs, extracted text, indexes and vectors are excluded; obtain authorized inputs and generate locally. Software licensing does not grant rights to redistribute their content.",
+  "documents": [
+    {
+      "document_id": "215a2c0819aedd51b9fb9394",
+      "subject": "地理",
+      "source_file": "ZW18-101_普通高中地理课程标准（2017年版）96.pdf",
+      "source_sha256": "51b5cd0275f7c224653d7e04a57aaf02b51fd955c036057ecdc08750b4a84d53",
+      "pdf_pages_total": 72,
+      "status": "extracted"
+    },
+    {
+      "document_id": "4d2a0bfbd0edcd7bb4f4352a",
+      "subject": "生物学",
+      "source_file": "ZW18-102_普通高中生物学课程标准（2017年版）96.pdf",
+      "source_sha256": "0457c4543d556c3ab84d29fcae1d7235a6b5fcef20e6656407f5d3ac71508965",
+      "pdf_pages_total": 100,
+      "status": "extracted"
+    },
+    {
+      "document_id": "e0ca8f175f03b93126fd18fe",
+      "subject": "化学",
+      "source_file": "ZW18-103_普通高中化学课程标准（2017年版）96.pdf",
+      "source_sha256": "6a4758b769bff411baa8f7c68380bb29b78956fc1146e8cf033f60b744e3b35c",
+      "pdf_pages_total": 116,
+      "status": "extracted"
+    },
+    {
+      "document_id": "b4119c841896ef6992292e8d",
+      "subject": "物理",
+      "source_file": "ZW18-131_普通高中物理课程标准（2017年版）96.pdf",
+      "source_sha256": "50b77ebbbaa0a538a7a26843dac7ce8f9f615dec28689be2a3a7dcbbc0849cd2",
+      "pdf_pages_total": 100,
+      "status": "extracted"
+    },
+    {
+      "document_id": "8e30b2d7c7e1e8f7dc4cec1e",
+      "subject": "英语",
+      "source_file": "ZW18-133_普通高中英语课程标准（2017年版）96.pdf",
+      "source_sha256": "ca1a6b9d8cdd9d41f5228680a9847ba43f4330ea627ed4f7751668e957d212b1",
+      "pdf_pages_total": 224,
+      "status": "extracted"
+    },
+    {
+      "document_id": "ebf373b64e2e41403206a562",
+      "subject": "思想政治",
+      "source_file": "ZW18-144_普通高中思想政治课程标准（2017年版）96.pdf",
+      "source_sha256": "982f92f09b7565fc8c188a13342c798dba36604f0d5497b0a052d14541ef161b",
+      "pdf_pages_total": 72,
+      "status": "extracted"
+    },
+    {
+      "document_id": "e6df6aef03f9612809804120",
+      "subject": "语文",
+      "source_file": "ZW18-310_普通高中语文课程标准（2017年版）96.pdf",
+      "source_sha256": "f5598c5defae19acdc120e6fe50db639696edbd939b4e662b7a338b26d771e17",
+      "pdf_pages_total": 68,
+      "status": "extracted"
+    },
+    {
+      "source_file": "ZW18-61_普通高中课程方案（2017年版）96.pdf",
+      "source_sha256": "d28b9733eaf2fcaeb76b8c8378c50a6003b22b6fa4b0450d84031c9a77794dc3",
+      "pdf_pages_total": 28,
+      "status": "not_applicable"
+    },
+    {
+      "document_id": "a2f81c5d7d120e6d2e17c0d8",
+      "subject": "数学",
+      "source_file": "ZW18-72_普通高中数学课程标准（2017年版）96.pdf",
+      "source_sha256": "e44331fd0fe5941d8261b6c0853af2d3e35da3c9cc4a992cd96202023eaf176c",
+      "pdf_pages_total": 192,
+      "status": "extracted"
+    },
+    {
+      "document_id": "62721dd7c60aba16634ee336",
+      "subject": "历史",
+      "source_file": "ZW18-86_普通高中历史课程标准（2017年版）96.pdf",
+      "source_sha256": "81cdc7248e235ec8bd0caf23a3f8a77812116cc2f9175b4e1b77082f2722e287",
+      "pdf_pages_total": 96,
+      "status": "extracted"
+    }
+  ],
+  "embedding_model": {
+    "base_model": "BAAI/bge-small-zh-v1.5",
+    "base_model_url": "https://huggingface.co/BAAI/bge-small-zh-v1.5",
+    "onnx_repository": "Qdrant/bge-small-zh-v1.5",
+    "onnx_revision": "46fbe35fd4374a00fee7de77dfddaeb6dd6a2c59",
+    "source_commit": "https://huggingface.co/Qdrant/bge-small-zh-v1.5/commit/46fbe35fd4374a00fee7de77dfddaeb6dd6a2c59",
+    "upstream_license": "MIT",
+    "dimension": 512,
+    "max_query_tokens": 512,
+    "files_sha256": {
+      "config.json": "9088751d39abbf86ec3d19ffca92ad62ad19075f7e59712e6c71217fa125d1d3",
+      "model_optimized.onnx": "1294ea4b6331115a353d81f96b85e8c8d7fdcc284453d5b2fab5b016230aad38",
+      "special_tokens_map.json": "b6d346be366a7d1d48332dbc9fdf3bf8960b5d879522b7799ddba59e76237ee3",
+      "tokenizer.json": "48cea5d44424912a6fd1ea647bf4fe50b55ab8b1e5879c3275f80e339e8fae26",
+      "tokenizer_config.json": "e6f3b96db926a37d4039995fbf5ad17de158dfb8f6343d607e4dbaad18d75f5a"
+    }
+  }
+}

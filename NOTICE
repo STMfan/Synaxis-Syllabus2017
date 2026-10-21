@@ -1,0 +1,74 @@
+Synaxis-Syllabus2017 — 授权与第三方资源边界
+
+Copyright (c) 2026 STMfan
+
+本项目自行编写的源码、构建脚本、提取规则、合成测试及维护文档采用
+GNU Affero General Public License，版本 3 或其后续版本：
+SPDX-License-Identifier: AGPL-3.0-or-later
+完整标准正文见 LICENSE。
+
+This program is free software: you can redistribute it and/or modify it
+under the terms of the GNU Affero General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU Affero General Public License for more details.
+
+1. PyMuPDF / MuPDF 与其他软件依赖
+
+PDF 提取使用 PyMuPDF。PyMuPDF 与 MuPDF 的社区发行遵循其自身 GNU AGPLv3
+许可，也可另行取得 Artifex 商业许可。本项目选择 AGPL 不会修改上游许可，
+也不提供商业授权。使用、部署、修改及再分发相关软件组合时，应履行适用
+许可证的源码提供、版权保留等义务；不随源码附送依赖轮子或二进制，并不
+意味着这些义务消失。锁定的依赖版本见 uv.lock。
+
+官方依据：
+https://pymupdf.io/licensing
+https://artifex.com/licensing
+https://github.com/pymupdf/PyMuPDF
+
+NumPy、FastEmbed、ONNX Runtime 及其余依赖分别保留上游许可证。本仓库的
+AGPL 不替代这些许可；再次分发依赖时应同时保留所需版权和许可文本。
+
+2. 课程标准原文与本地生成数据
+
+本仓库不分发教育部课程标准原始 PDF、正文提取结果、chunks/sections/
+source_pages、含原文的 SQLite 库或预生成向量。部署者需从官方来源或其他
+合法渠道取得有权使用的文件，并在本机生成检索数据。
+
+课标文件及其正文的权利仍属于原权利人。代码许可不向使用者授予原 PDF、
+课标原文或相关派生内容的再分发权。本地提取、建立索引或生成向量也不会
+自动取得这些权利；计划另行分发数据时，需确认适用的授权条件。
+
+provenance/sources.json 仅记录文件名、校验和、页数及官方来源等事实元数据，
+不包含课标正文。抽样核查的原始出版物版权页含未经许可不得复制或使用的
+权利保留说明；官方公开下载也不等于按本仓库软件许可证重新授权。
+
+官方课程标准发布入口：
+https://www.moe.gov.cn/srcsite/A26/s8001/201801/t20180115_324647.html
+教育部网站声明：
+https://www.moe.gov.cn/jyb_sy/s3634/201005/t20100504_87292.html
+https://en.moe.gov.cn/statement/
+
+3. 本地 embedding 模型
+
+上游基础模型 BAAI/bge-small-zh-v1.5 与本项目使用的 Qdrant ONNX 转换仓库均
+标注 MIT 许可。实际模型来源是 Qdrant/bge-small-zh-v1.5，固定修订为
+46fbe35fd4374a00fee7de77dfddaeb6dd6a2c59，而非名称相近的其他模型仓库。
+本仓库不附带模型权重或 tokenizer；它们由部署者按上游条款另行下载。
+如再次分发模型，须保留上游适用版权及完整 MIT 许可。模型 MIT 许可不
+适用于课程标准正文，也不授予课标内容的再分发权。
+
+官方模型与转换来源：
+https://huggingface.co/BAAI/bge-small-zh-v1.5
+https://huggingface.co/Qdrant/bge-small-zh-v1.5
+https://huggingface.co/Qdrant/bge-small-zh-v1.5/commit/46fbe35fd4374a00fee7de77dfddaeb6dd6a2c59
+
+4. 版本与用途
+
+项目以指定 2017 年版课程标准作为历史检索基准。课程标准不等同于独立
+高考考试大纲；本项目不宣称涵盖完整或最新考试范围，也不替代原文、后续
+修订版本及正式考试要求。检索分数只用于排序，不代表内容正确率或考查概率。
