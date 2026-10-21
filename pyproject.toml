@@ -22,7 +22,7 @@ curriculum-search = "curriculum_search.cli:main"
 packages = ["src/curriculum_search"]
 
 [tool.hatch.build.targets.sdist]
-include = ["src/curriculum_search/*.py", "src/curriculum_search/*.json", "tests/*.py", "scripts/*.py", "provenance/*.json", ".github/workflows/*.yml", "pyproject.toml", "uv.lock", "README.md", "LICENSE", "NOTICE", ".gitignore", ".gitattributes"]
+include = ["src/curriculum_search/*.py", "src/curriculum_search/*.json", "src/curriculum_search/*.txt", "tests/*.py", "scripts/*.py", "provenance/*.json", ".github/workflows/*.yml", "pyproject.toml", "uv.lock", "README.md", "LICENSE", "NOTICE", ".gitignore", ".gitattributes"]
 
 [[tool.uv.index]]
 url = "https://pypi.org/simple"
