@@ -8,12 +8,20 @@ version = "1.0.0.post1"
 license = "AGPL-3.0-or-later"
 license-files = ["LICENSE", "NOTICE"]
 description = "Traceable local extraction and retrieval for Chinese 2017 high-school curriculum standards"
-requires-python = ">=3.12"
+requires-python = ">=3.12.15"
 dependencies = ["numpy==2.5.4"]
 
 [project.optional-dependencies]
 extract = ["pymupdf==1.28.2"]
-embedding = ["fastembed==0.9.0"]
+embedding = ["fastembed==0.9.0", "certifi>=2026.10.19"]
+
+[dependency-groups]
+dev = ["pip-audit==2.10.1"]
+
+[tool.uv]
+# Upstream 0.9.0's old Pillow ceiling excludes the patched image decoders.
+# Only text embeddings are used here; covered by offline integration acceptance.
+override-dependencies = ["pillow>=13,<14"]
 
 [project.scripts]
 curriculum-search = "curriculum_search.cli:main"
@@ -22,7 +30,7 @@ curriculum-search = "curriculum_search.cli:main"
 packages = ["src/curriculum_search"]
 
 [tool.hatch.build.targets.sdist]
-include = ["src/curriculum_search/*.py", "src/curriculum_search/*.json", "src/curriculum_search/*.txt", "tests/*.py", "scripts/*.py", "provenance/*.json", ".github/workflows/*.yml", "pyproject.toml", "uv.lock", "README.md", "LICENSE", "NOTICE", ".gitignore", ".gitattributes"]
+include = ["src/curriculum_search/*.py", "src/curriculum_search/*.json", "src/curriculum_search/*.txt", "tests/*.py", "scripts/*.py", "provenance/*.json", ".github/workflows/*.yml", "pyproject.toml", ".python-version", "uv.lock", "README.md", "LICENSE", "NOTICE", ".gitignore", ".gitattributes"]
 
 [[tool.uv.index]]
 url = "https://pypi.org/simple"

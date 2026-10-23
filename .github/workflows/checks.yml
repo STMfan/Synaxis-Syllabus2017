@@ -14,7 +14,7 @@ concurrency:
 
 jobs:
   syllabus:
-    name: Syllabus / ${{ matrix.os }} / Python 3.12
+    name: Syllabus / ${{ matrix.os }} / Python 3.12.15
     runs-on: ${{ matrix.os }}
     timeout-minutes: 15
     strategy:
@@ -25,16 +25,20 @@ jobs:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
           persist-credentials: false
-      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
-        with:
-          python-version: '3.12'
       - uses: astral-sh/setup-uv@d0cc045d04ccac9d8b7881df0226f9e82c39688e # v6
         with:
-          version: '0.13.0'
+          version: '0.13.5'
           enable-cache: true
           cache-dependency-glob: uv.lock
+      - name: Install Python security patch through uv
+        run: uv python install 3.12.15
       - name: Install locked base environment
         run: uv sync --frozen
+      - name: Audit locked dependencies including optional tools
+        run: |
+          uv run --frozen python -c "from pathlib import Path; Path('test-results').mkdir(exist_ok=True)"
+          uv export --frozen --all-extras --all-groups --no-emit-project --output-file test-results/security-requirements.txt
+          uv run --frozen pip-audit --disable-pip --require-hashes -r test-results/security-requirements.txt
       - name: Verify synthetic pipeline, offline boundaries and portable bundle
         run: uv run --frozen python -m unittest discover -s tests -v
       - name: Verify optional PDF extraction using synthetic documents
@@ -51,7 +55,7 @@ jobs:
         shell: bash
         run: |
           uv run --frozen python scripts/publication.py --output dist/synaxis-syllabus-source.zip
-          python -m zipfile -e dist/synaxis-syllabus-source.zip "$RUNNER_TEMP/synaxis-syllabus-source"
+          uv run --frozen python -m zipfile -e dist/synaxis-syllabus-source.zip "$RUNNER_TEMP/synaxis-syllabus-source"
           cd "$RUNNER_TEMP/synaxis-syllabus-source"
           uv sync --frozen
           uv run --frozen python -m unittest discover -s tests -v

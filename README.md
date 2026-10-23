@@ -10,12 +10,12 @@
 
 ## 从源码安装
 
-需要 Python 3.12 及 [uv](https://docs.astral.sh/uv/getting-started/installation/)。从仓库根目录运行：
+需要 Python 3.12.15 及 [uv 0.13.5+](https://docs.astral.sh/uv/getting-started/installation/)。从仓库根目录运行：
 
 ```sh
 git clone https://github.com/STMfan/Synaxis-Syllabus2017.git
 cd Synaxis-Syllabus2017
-uv venv .venv --python 3.12
+uv venv .venv --python 3.12.15
 uv sync --frozen
 uv run --frozen curriculum-search --version
 uv run --frozen python -m unittest discover -s tests -v
@@ -26,6 +26,8 @@ uv run --frozen python -m unittest discover -s tests -v
 ```sh
 uv sync --frozen --extra extract --extra embedding
 ```
+
+安全基线：Pillow 13+、Certifi 2026.10.19+，具体版本由 `uv.lock` 固定。FastEmbed 0.9.0 的旧 Pillow 上限暂由 `tool.uv.override-dependencies` 覆盖，本项目只使用文本嵌入，并验证实际本地 ONNX 检索；待上游支持后移除覆盖。CI 审计全部可选依赖。
 
 `extract` 使用 PyMuPDF，`embedding` 使用 FastEmbed/ONNX Runtime。可选安装不会改变相关组件的许可义务；公开分发、修改或部署时须按 LICENSE/NOTICE 评估整个组合的授权要求。
 

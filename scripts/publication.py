@@ -10,7 +10,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 FILES = (
     "README.md", "LICENSE", "NOTICE", "pyproject.toml", "uv.lock", ".gitignore",
-    ".gitattributes", "provenance/sources.json", ".github/workflows/checks.yml",
+    ".gitattributes", ".python-version", "provenance/sources.json", ".github/workflows/checks.yml",
 )
 DIRECTORIES = ("src", "tests", "scripts")
 SKIP = {"__pycache__", ".pytest_cache", ".ruff_cache", ".venv", "test-results"}
